@@ -24,7 +24,7 @@ const Product = ({
         width={200}
         height={200}
         objectFit='contain'
-        alt=''
+        alt='product image'
         className='my-2 mx-auto'
       />
       <h4 className='my-3'>{title}</h4>

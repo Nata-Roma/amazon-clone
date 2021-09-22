@@ -16,6 +16,7 @@ const Header = () => {
             height={40}
             objectFit='contain'
             className='cursor-pointer'
+            alt='Amazon Logo'
           />
         </div>
         <div className='bg-yellow-400 hover:bg-yellow-500 h-10 hidden sm:flex flex-grow cursor-pointer rounded-md'>
@@ -50,7 +51,7 @@ const Header = () => {
           <MenuIcon className='h-6 mr-1' />
           All
         </p>
-        <p className='link'>Today's Deals</p>
+        <p className='link'>Today&#39;s Deals</p>
         <p className='link'>Customer Service</p>
         <p className='link'>Registry</p>
         <p className='link hidden lg:inline-flex'>Gift Cards</p>
