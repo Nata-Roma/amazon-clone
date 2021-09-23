@@ -4,8 +4,16 @@ import {
   ShoppingCartIcon,
   MenuIcon,
 } from '@heroicons/react/outline';
+import { useSession, signIn, signOut } from "next-auth/client";
+import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { selectItems } from '../slices/basketSlice';
 
 const Header = () => {
+  const [session] = useSession();
+  const router = useRouter();
+  const basketItems = useSelector(selectItems);
+
   return (
     <header>
       <div className='bg-amazon_blue flex items-center p-1 flex-grow py-2'>
@@ -17,6 +25,7 @@ const Header = () => {
             objectFit='contain'
             className='cursor-pointer'
             alt='Amazon Logo'
+            onClick={() => router.push('/')}
           />
         </div>
         <div className='bg-yellow-400 hover:bg-yellow-500 h-10 hidden sm:flex flex-grow cursor-pointer rounded-md'>
@@ -27,21 +36,21 @@ const Header = () => {
           <SearchIcon className='h-10 p-2' />
         </div>
         <div className='text-white text-xs flex items-center space-x-6 mx-6'>
-          <div className='link'>
-            <p>Hello, sign in</p>
+          <div onClick={!session ? signIn : signOut} className='link'>
+            <p>{session ? `Hello ${session.user.name}` : 'Sign In'}</p>
             <p className='md:text-sm font-extrabold'>Accounts & Lists</p>
           </div>
           <div className='link'>
             <p>Returns</p>
             <p className='md:text-sm font-extrabold'>& Orders</p>
           </div>
-          <div className='link flex items-center relative'>
+          <div className='link flex items-center relative' onClick={() => router.push('/checkout')}>
             <ShoppingCartIcon className='h-10' />
             <p className='hidden md:inline md:text-sm font-extrabold mt-2'>
               Basket
             </p>
             <span className='text-center absolute w-4 h-4 rounded-full bg-yellow-400 top-0 right-0 md:right-10'>
-              0
+              {basketItems.length}
             </span>
           </div>
         </div>

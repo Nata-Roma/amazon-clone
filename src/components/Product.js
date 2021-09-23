@@ -1,6 +1,7 @@
 import { StarIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addToBasket } from '../slices/basketSlice';
 
 const Product = ({
   id,
@@ -12,7 +13,21 @@ const Product = ({
   rating,
   isPrime,
 }) => {
-  // const [isPrime] = useState(Math.random() < 0.5);
+  const dispatch = useDispatch();
+
+  const itemsToBasket = () => {
+    const product = {
+      id,
+      title,
+      price,
+      category,
+      description,
+      image,
+      rating,
+      isPrime,
+    };
+    dispatch(addToBasket(product));
+  }
 
   return (
     <div className='flex flex-col p-10 relative bg-white m-5 z-30'>
@@ -44,11 +59,11 @@ const Product = ({
       </p>
       {isPrime && (
         <div className='flex items-center space-x-2 -mt-5'>
-          <img className='w-12' src='/prime-tag.png' alt='' />
+          <img loading='lazy' className='w-12' src='/prime-tag.png' alt='' />
           <p className='text-xs text-gray-500'>FREE next-fay delivery</p>
         </div>
       )}
-      <button className='mt-auto button'>Add to Busket</button>
+      <button onClick={itemsToBasket} className='mt-auto button'>Add to Busket</button>
     </div>
   );
 };

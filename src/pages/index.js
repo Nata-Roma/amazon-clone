@@ -25,6 +25,7 @@ export default Home;
 
 export const getServerSideProps = async (ctx) => {
   const res = await fetch('https://fakestoreapi.com/products');
+  
   let products = await res.json();
   products = products.map(product => {
     const isPrime = Math.random() < 0.5;
