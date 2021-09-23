@@ -22,12 +22,12 @@ const Checkout = () => {
           </div>
 
         </div>
-        <div className='flex flex-col space-y-3 mx-5'>
+        <div className='flex flex-col space-y-3 mx-5 lg:w-48'>
           <h4>Subtotal ({`${basketItems.length} items`}): {new Intl.NumberFormat('de-DE', {
             style: 'currency',
             currency: 'EUR',
           }).format(total)}</h4>
-          <button disabled={!session || !basketItems.length} className={`button ${(!session || !basketItems.length) && 'from-gray-300 to-gray-500 border-gray-300 cursor-not-allowed'}`}>{session ? 'Proceed to Checkout' : 'Sign In to Checkout'}</button>
+          <button disabled={!session || !basketItems.length} className={`button min-w-full ${(!session || !basketItems.length) && 'from-gray-300 to-gray-500 border-gray-300 cursor-not-allowed'}`}>{session ? 'Proceed to Checkout' : 'Sign In to Checkout'}</button>
         </div>
       </main>
     </div>
